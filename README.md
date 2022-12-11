@@ -51,3 +51,6 @@
 如果遇到问题可以提交 [issues](https://github.com/LiQing-Code/mouse-danmu/issues)
 
 表情弹幕是可以点击打开网页查看的，用户名也可以点击查看主页
+
+![效果演示](https://user-images.githubusercontent.com/51829935/206930179-9e6a5419-0127-4cf3-9f36-7554a66e448a.png)
+![选项界面](https://user-images.githubusercontent.com/51829935/206930213-3c101622-2f8f-4fcd-949d-46b971d9d552.png)
