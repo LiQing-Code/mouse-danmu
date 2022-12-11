@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+    }
+}
+
+include ':BLiveDanmu'
+project(':BLiveDanmu').projectDir = new File(settingsDir, '../BLiveDanmu')
