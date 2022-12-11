@@ -48,6 +48,8 @@
 
 ## 更多
 
+部分直播间 roomId 是会重定向的，列如 https://live.bilibili.com/1 需要在浏览器中打开直播间 输入 `window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id` 并回车获取真实roomId
+
 英文语言文件不可用状态，欢迎有能力的人补充语言文件，更欢迎大家参与开发
 
 如果遇到问题可以提交 [issues](https://github.com/LiQing-Code/mouse-danmu/issues)
