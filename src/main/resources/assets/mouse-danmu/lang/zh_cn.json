@@ -60,5 +60,6 @@
   "text.mouse-danmu.open-live-room": "点击打开直播间",
   "text.mouse-danmu.share-live-room": "分享了直播间",
   "text.mouse-danmu.special-attention-live-room": "特别关注了主播",
-  "text.autoconfig.mouse-danmu.option.gift.isShowFreeGiftToOverlayMessage": "免费礼物显示到屏幕中间"
+  "text.autoconfig.mouse-danmu.option.gift.isShowFreeGiftToOverlayMessage": "免费礼物显示到屏幕中间",
+  "mouse-danmu.bilibili": "哔哩哔哩"
 }

@@ -3,14 +3,14 @@
   "id": "mouse-danmu",
   "version": "${version}",
   "name": "鼠鼠弹幕",
-  "description": "可以看哔哩哔哩直播弹幕！\n 使用 '/mousedanmaku' 或 '/dm' 控制\n '/dm connect 直播间号' 连接直播间",
+  "description": "可以看哔哩哔哩直播弹幕！\n 使用 '/mousedanmaku' 或 '/dm' 控制\n '/dm connect 直播间号' 连接直播间\n点击网站按钮获取更多使用帮助",
   "authors": [
     "立青"
   ],
   "contact": {
-    "homepage": "https://jq.qq.com/?_wv=1027&k=nImOUpnV",
-    "sources": "https://jq.qq.com/?_wv=1027&k=nImOUpnV",
-    "issues": "https://jq.qq.com/?_wv=1027&k=nImOUpnV"
+    "homepage": "https://gitee.com/LiQing-Code/mouse-danmu",
+    "sources": "https://github.com/LiQing-Code/mouse-danmu",
+    "issues": "https://github.com/LiQing-Code/mouse-danmu/issues"
   },
   "license": "MIT",
   "icon": "assets/mouse-danmu/icon.png",
@@ -32,7 +32,8 @@
   "custom": {
     "modmenu": {
       "links": {
-        "mouse-danmu.qun": "https://jq.qq.com/?_wv=1027&k=nImOUpnV"
+        "mouse-danmu.qun": "https://jq.qq.com/?_wv=1027&k=nImOUpnV",
+        "mouse-danmu.bilibili": "https://space.bilibili.com/345259002"
       }
     }
   }
