@@ -39,7 +39,7 @@
   "text.autoconfig.mouse-danmu.option.liveRoom.autoConnect.@Tooltip": "是否在加入游戏时连接到下面填写的直播间",
   "text.autoconfig.mouse-danmu.option.liveRoom.history": "连接历史",
   "text.autoconfig.mouse-danmu.option.liveRoom.roomId": "直播间号",
-  "text.autoconfig.mouse-danmu.option.liveRoom.roomId.@Tooltip": "一般是浏览器地址里显示的那串数字(真有二般情况还没处理)",
+  "text.autoconfig.mouse-danmu.option.liveRoom.roomId.@Tooltip": "一般是浏览器地址里显示的那串数字",
   "text.autoconfig.mouse-danmu.option.superChat.color": "颜色",
   "text.autoconfig.mouse-danmu.option.superChat.color.@Tooltip": "颜色只对聊天框有效,Boss框对颜色有限制",
   "text.autoconfig.mouse-danmu.option.superChat.color100": "100档颜色",
