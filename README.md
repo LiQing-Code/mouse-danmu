@@ -50,7 +50,11 @@
 
 ## 更多
 
-部分直播间 roomId 是会重定向的，列如 https://live.bilibili.com/1 需要在浏览器中打开直播间 输入 `window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id` 并回车获取真实roomId
+部分直播间 roomId 是会重定向的，列如 https://live.bilibili.com/1 需要在浏览器中打开直播间，然后按F12打开开发者工具，找到控制台执行以下代码，就能获取到真实roomId
+```javascript 
+window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id
+``` 
+
 
 英文语言文件不可用状态，欢迎有能力的人补充语言文件，更欢迎大家参与开发
 
