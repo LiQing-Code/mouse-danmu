@@ -17,7 +17,7 @@
 
 ## 安装
 
-点击[下载](https://gitee.com/LiQing-Code/mouse-danmu/releases/download/1.0.1/mouse-danmu-1.0.1.jar)
+点击[下载](https://gitee.com/LiQing-Code/mouse-danmu/releases/download/v1.0.1/mouse-danmu-1.0.1.jar)
 
 可以看看这个视频 [Mod新手教程](https://www.bilibili.com/video/BV1cX4y1T7RZ)
 
