@@ -2,6 +2,10 @@
 
 用于显示哔哩哔哩直播弹幕的《我的世界》Fabric MOD
 
+## 代码托管
+- [Github](https://github.com/LiQing-Code/mouse-danmu)
+- [码云](https://gitee.com/LiQing-Code/mouse-danmu)
+
 ## 特点
 - 自定义弹幕颜色
 - 自定义显示的信息
