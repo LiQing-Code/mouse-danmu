@@ -24,7 +24,7 @@ public class DanmuText implements DanmuConverter {
                         .withHoverEvent(new HoverEvent(net.minecraft.text.HoverEvent.Action.SHOW_TEXT,
                                 Text.translatable("text.mouse-danmu.click-to-user-space"))));
 
-        if (config.danmu.isShowFansMedal && user.fansMedal != null && !Objects.equals(user.name, "")) {
+        if (config.danmu.isShowFansMedal && user.fansMedal != null && user.fansMedal.name.length() > 0) {
             var fansMedalText = Texts.bracketed(Text.literal(user.fansMedal.name)
                             .append("|")
                             .append(String.valueOf(user.fansMedal.level)))
