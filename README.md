@@ -49,8 +49,6 @@
 
 ## 联系方式
 - [QQ群](https://jq.qq.com/?_wv=1027&k=nImOUpnV)
-- [哔哩哔哩](https://space.bilibili.com/345259002)
-- 邮箱: oh-0.0@qq.com | oh-0.0@outlook.com
 
 ## 更多
 
