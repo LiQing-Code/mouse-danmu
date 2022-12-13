@@ -47,9 +47,6 @@
 
   列如 `/dm test 1000` 就是每秒发送一条测试弹幕
 
-## 联系方式
-- [QQ群](https://jq.qq.com/?_wv=1027&k=nImOUpnV)
-
 ## 更多
 
 部分直播间 roomId 是会重定向的，列如 https://live.bilibili.com/1 需要在浏览器中打开直播间，然后按F12打开开发者工具，找到控制台执行以下代码，就能获取到真实roomId
@@ -60,7 +57,7 @@ window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id
 
 英文语言文件不可用状态，欢迎有能力的人补充语言文件，更欢迎大家参与开发
 
-如果遇到问题可以提交 [issues](https://github.com/LiQing-Code/mouse-danmu/issues)
+如果遇到问题可以提交 [issues](https://github.com/LiQing-Code/mouse-danmu/issues) 或到[QQ群](https://jq.qq.com/?_wv=1027&k=nImOUpnV)反馈
 
 表情弹幕是可以点击打开网页查看的，用户名也可以点击查看主页
 
