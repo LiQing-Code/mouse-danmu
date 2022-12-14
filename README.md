@@ -1,6 +1,10 @@
 # 鼠鼠弹幕
 
-用于显示哔哩哔哩直播代码的《我的世界》Fabric MOD
+用于显示哔哩哔哩直播弹幕的《我的世界》Fabric MOD
+
+## 代码托管
+- [Github](https://github.com/LiQing-Code/mouse-danmu)
+- [码云](https://gitee.com/LiQing-Code/mouse-danmu)
 
 ## 特点
 - 自定义弹幕颜色
@@ -16,6 +20,8 @@
  安装这个以后才能打开MOD选项，想实现用命令打开选项界面的，可我不会啊！！！
 
 ## 安装
+
+点击[下载](https://github.com/LiQing-Code/mouse-danmu/releases/download/release/mouse-danmu-1.0.1.jar)
 
 可以看看这个视频 [Mod新手教程](https://www.bilibili.com/video/BV1cX4y1T7RZ)
 
@@ -41,18 +47,17 @@
 
   列如 `/dm test 1000` 就是每秒发送一条测试弹幕
 
-## 联系方式
-- [QQ群](https://jq.qq.com/?_wv=1027&k=nImOUpnV)
-- [哔哩哔哩](https://space.bilibili.com/345259002)
-- 邮箱: oh-0.0@qq.com | oh-0.0@outlook.com
-
 ## 更多
 
-部分直播间 roomId 是会重定向的，列如 https://live.bilibili.com/1 需要在浏览器中打开直播间 输入 `window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id` 并回车获取真实roomId
+部分直播间 roomId 是会重定向的，列如 https://live.bilibili.com/1 需要在浏览器中打开直播间，然后按F12打开开发者工具，找到控制台执行以下代码，就能获取到真实roomId
+```javascript 
+window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id
+``` 
+
 
 英文语言文件不可用状态，欢迎有能力的人补充语言文件，更欢迎大家参与开发
 
-如果遇到问题可以提交 [issues](https://github.com/LiQing-Code/mouse-danmu/issues)
+如果遇到问题可以提交 [issues](https://github.com/LiQing-Code/mouse-danmu/issues) 或到[QQ群](https://jq.qq.com/?_wv=1027&k=nImOUpnV)反馈
 
 表情弹幕是可以点击打开网页查看的，用户名也可以点击查看主页
 
