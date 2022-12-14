@@ -16,8 +16,8 @@
 - 我的世界 >= 1.19.1
 - [fabric-loader](https://github.com/FabricMC/fabric-loader) >= 0.14.9
 - [Cloth Config](https://github.com/shedaniel/cloth-config) >= 8.2.88
-- [可选,推荐安装] [ModMenu](https://github.com/TerraformersMC/ModMenu)
- 安装这个以后才能打开MOD选项，想实现用命令打开选项界面的，可我不会啊！！！
+- [可选,推荐安装] [ModMenu](https://github.com/TerraformersMC/ModMenu) >= 
+ 安装这个以后才能打开MOD选项
 
 ## 安装
 

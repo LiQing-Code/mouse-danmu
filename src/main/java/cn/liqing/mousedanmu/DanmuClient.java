@@ -56,7 +56,7 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
 
     @Override
     public boolean connect(int room) {
-        if (!super.connect(room)){
+        if (!super.connect(room)) {
             status();
             return false;
         }
@@ -73,13 +73,13 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
 
     @Override
     public boolean close() {
-        if (!super.close())
-        {
+        if (!super.close()) {
             status();
             return false;
         }
-
-        bossBars.forEach(bossBar -> delSuperChat(bossBar.getUuid()));
+        for (int i = bossBars.size() - 1; i >= 0; i--) {
+            delSuperChat(bossBars.get(i).getUuid());
+        }
         bossBars.clear();
         return true;
     }
@@ -87,21 +87,22 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
     public void status() {
         if (player == null)
             return;
-
-        MutableText text = null;
-        MouseDanmu.LOGGER.info(state.toString());
-        switch (state) {
-            case CLOSED, CLOSING ->
-                    text = Text.translatable("text.mouse-danmu.live-room-" + state.toString().toLowerCase());
-            case CONNECTED, CONNECTING ->
-                    text = Text.translatable("text.mouse-danmu.live-room-" + state.toString().toLowerCase(),
-                                    String.valueOf(room))
-                            .formatted(Formatting.GREEN)
-                            .styled(style -> style
-                                    .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,
-                                            "https://live.bilibili.com/" + room))
-                                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                            Text.translatable("text.mouse-danmu.open-live-room"))));
+        MutableText text;
+        switch (super.state()) {
+            case 1 -> text = Text.translatable("text.mouse-danmu.live-room-connected", String.valueOf(room))
+                    .formatted(Formatting.GREEN)
+                    .styled(style -> style
+                            .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,
+                                    "https://live.bilibili.com/" + room))
+                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                    Text.translatable("text.mouse-danmu.open-live-room"))));
+            case 3 -> text = Text.translatable("text.mouse-danmu.live-room-connecting", String.valueOf(room))
+                    .styled(style -> style
+                            .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,
+                                    "https://live.bilibili.com/" + room))
+                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                    Text.translatable("text.mouse-danmu.open-live-room"))));
+            default -> text = Text.translatable("text.mouse-danmu.live-room-closed");
         }
         player.sendMessage(text);
     }
@@ -190,11 +191,11 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
         guard.name = "舰长";
         guard.unit = "月";
         guard.level = 3;
+        user.guardLevel = 3;
         guard.num = 1;
         guard.price = 138;
         onGuard(guard);
         Thread.sleep(delay);
-        user.guardLevel = 3;
         user.fansMedal.name = "粉丝团";
         user.fansMedal.level = 21;
         danmu.body = "舰长有什么礼物吗?";
@@ -204,10 +205,10 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
         //粉丝团25级及提督
         guard.name = "提督";
         guard.level = 2;
+        user.guardLevel = 2;
         guard.price = 1998;
         onGuard(guard);
         Thread.sleep(delay);
-        user.guardLevel = 2;
         user.fansMedal.name = "粉丝团";
         user.fansMedal.level = 25;
         danmu.body = "提督总有礼物吧！！！";
@@ -217,10 +218,10 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
         //粉丝团29级及总督
         guard.name = "总督";
         guard.level = 1;
+        user.guardLevel = 1;
         guard.price = 19998;
         onGuard(guard);
         Thread.sleep(delay);
-        user.guardLevel = 1;
         user.fansMedal.name = "蒙古人";
         user.fansMedal.level = 29;
         danmu.body = "别激动，这其实是后台代码生成的总督，希望大家别被骗了";
@@ -380,7 +381,6 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
     }
 
     int retries = 0;
-
     @Override
     public void onClose(int code, String reason, boolean remote) {
         status();
