@@ -8,20 +8,22 @@
 
 ## 特点
 - 自定义弹幕颜色
-- 自定义显示的信息
+- 自定义要显示的信息
 - BoosBar显示醒目留言
+- 贴近官方风格
 
 ## 前置
 
 - 我的世界 >= 1.19.1
 - [fabric-loader](https://github.com/FabricMC/fabric-loader) >= 0.14.9
+- [fabric-api](https://github.com/FabricMC/fabric) >= 0.58.5+1.19.1
 - [Cloth Config](https://github.com/shedaniel/cloth-config) >= 8.2.88
-- [可选,推荐安装] [ModMenu](https://github.com/TerraformersMC/ModMenu) >= 
+- [可选,推荐安装] [ModMenu](https://github.com/TerraformersMC/ModMenu) >= 4.1.1
  安装这个以后才能打开MOD选项
 
 ## 安装
 
-点击[下载](https://github.com/LiQing-Code/mouse-danmu/releases/download/release/mouse-danmu-1.0.1.jar)
+点击[下载](https://github.com/LiQing-Code/mouse-danmu/releases/download/1.1.0/mouse-danmu-1.1.0.jar)
 
 可以看看这个视频 [Mod新手教程](https://www.bilibili.com/video/BV1cX4y1T7RZ)
 
@@ -49,7 +51,7 @@
 
 ## 更多
 
-部分直播间 roomId 是会重定向的，列如 https://live.bilibili.com/1 需要在浏览器中打开直播间，然后按F12打开开发者工具，找到控制台执行以下代码，就能获取到真实roomId
+部分直播间 roomId 是会重定向的，列如直播间 https://live.bilibili.com/1 需要在浏览器中打开，然后按F12打开开发者工具，找到控制台执行以下代码，就能获取到真实roomId
 ```javascript 
 window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id
 ``` 
