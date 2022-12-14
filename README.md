@@ -2,7 +2,6 @@
 ![license](https://img.shields.io/github/license/LiQing-Code/mouse-danmu)
 ![version](https://img.shields.io/github/v/release/liqing-code/mouse-danmu)
 ![downloads](https://img.shields.io/github/downloads/liqing-code/mouse-danmu/total)
-![GitHub watchers](https://img.shields.io/github/watchers/liqing-code/mouse-danmu)
 
 用于显示哔哩哔哩直播弹幕的《我的世界》Fabric MOD
 
