@@ -23,7 +23,7 @@ public class MouseDanmu implements ClientModInitializer {
         AutoConfig.register(ModConfig.class, JanksonConfigSerializer::new);
         configHolder = AutoConfig.getConfigHolder(ModConfig.class);
         config = configHolder.getConfig();
-        client = new DanmuClient();
+        client = new DanmuClient(config);
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) ->
                 MouseDanmuCommand.register(dispatcher));
     }

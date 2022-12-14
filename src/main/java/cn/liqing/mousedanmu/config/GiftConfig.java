@@ -11,7 +11,7 @@ public class GiftConfig implements ConfigData {
     public boolean isShowFreeGiftToOverlayMessage = false;
 
     @ConfigEntry.ColorPicker
-    public int color = Color.ofRGBA(240, 248, 187, 0).getColor();
+    public int color = Color.ofRGBA(255, 215, 119, 0).getColor();
 
     public int price1 = 5;
     @ConfigEntry.ColorPicker
@@ -23,7 +23,7 @@ public class GiftConfig implements ConfigData {
 
     public int price3 = 50;
     @ConfigEntry.ColorPicker
-    public int color3 = Color.ofRGBA(0, 0, 255, 0).getColor();
+    public int color3 = Color.ofRGBA(51, 153, 255, 0).getColor();
 
     public int price4 = 100;
     @ConfigEntry.ColorPicker

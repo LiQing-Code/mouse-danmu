@@ -10,7 +10,7 @@ public class DanmuConfig implements ConfigData {
     public boolean isShow = true;
     public boolean isShowEmoji = true;
     @ConfigEntry.ColorPicker
-    public int emojiColor = Color.ofRGBA(255, 215, 0, 0).getColor();
+    public int emojiColor = Color.ofRGBA(240, 248, 187, 0).getColor();
     public boolean isShowInteractive = true;
     public boolean isShowInteractiveToOverlayMessage = false;
     @ConfigEntry.ColorPicker

@@ -21,8 +21,6 @@ public class MouseDanmuCommand {
                         .then(ClientCommandManager.argument("delay", IntegerArgumentType.integer(0, 10000))
                                 .executes(context -> test(context.getArgument("delay", Integer.class))))
                         .executes(context -> test(500))));
-//                .then(ClientCommandManager.literal("option")
-//                        .executes(context -> option())));
 
         dispatcher.register(ClientCommandManager.literal("dm").redirect(literalCommandNode));
     }
@@ -51,15 +49,4 @@ public class MouseDanmuCommand {
         }).start();
         return 1;
     }
-
-//    public static int option() {
-//        MinecraftClient.getInstance().submit(() -> {
-//            var client = MinecraftClient.getInstance();
-//            Screen screen = client.currentScreen;
-//            Screen configScreen = AutoConfig.getConfigScreen(ModConfig.class, screen).get();
-//            //todo 显示一瞬间就没有了
-//            client.setScreenAndRender(configScreen);
-//        });
-//        return 1;
-//    }
 }

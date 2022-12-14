@@ -1,10 +1,8 @@
 package cn.liqing.mousedanmu;
 
 import cn.liqing.BLiveClient;
-import cn.liqing.DanmuHandler;
 import cn.liqing.model.*;
 import cn.liqing.mousedanmu.config.ModConfig;
-import cn.liqing.mousedanmu.util.ColorPicker;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
@@ -27,58 +25,83 @@ import java.util.UUID;
 import static net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.Disconnect;
 import static net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.Join;
 
-public class DanmuClient implements DanmuHandler, Join, Disconnect {
+public class DanmuClient extends BLiveClient implements Disconnect, Join {
     @Nullable PlayerEntity player;
-    final BLiveClient bClient;
-    final ModConfig config = MouseDanmu.config;
-    public final DanmuConverter danmuText = new DanmuText();
-    public final ArrayList<DanmuHandler> danmuHandlers = new ArrayList<>();
+    final ModConfig config;
+    final DanmuConverter danmuText;
+    final DanmuColorPicker colorPicker;
 
-    public DanmuClient() {
-        danmuHandlers.add(this);
-
-        bClient = new BLiveClient();
-        bClient.danmuHandlers = danmuHandlers;
-
+    public DanmuClient(ModConfig config) {
         ClientPlayConnectionEvents.JOIN.register(this);
         ClientPlayConnectionEvents.DISCONNECT.register(this);
+        this.config = config;
+        colorPicker = new DanmuColorPicker(config);
+        danmuText = new DanmuConverter(config, colorPicker);
     }
 
-    public void connect(int room) {
-        bClient.room = room;
-        if (bClient.isOpen() || bClient.isClosed()) {
-            bClient.close();
-            bClient.reconnect();
-        } else {
-            bClient.connect();
+    @Override
+    public void onPlayDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
+        close();
+        player = null;
+    }
+
+    @Override
+    public void onPlayReady(ClientPlayNetworkHandler handler, PacketSender sender, @NotNull MinecraftClient client) {
+        player = client.player;
+        if (config.liveRoom.autoConnect && config.liveRoom.roomId != 0) {
+            if (!connect(config.liveRoom.roomId))
+                status();
+        }
+    }
+
+    @Override
+    public boolean connect(int room) {
+        if (!super.connect(room)){
+            status();
+            return false;
         }
 
-        var history = MouseDanmu.client.config.liveRoom.history;
+        //添加连接记录
+        var history = config.liveRoom.history;
         int i = history.indexOf(room);
         if (i != -1)
             history.remove(i);
-        MouseDanmu.config.liveRoom.history.add(0, room);
+        history.add(0, room);
         MouseDanmu.configHolder.save();
+        return true;
     }
 
-    public void close() {
-        bClient.close();
+    @Override
+    public boolean close() {
+        if (!super.close())
+        {
+            status();
+            return false;
+        }
+
+        bossBars.forEach(bossBar -> delSuperChat(bossBar.getUuid()));
+        bossBars.clear();
+        return true;
     }
 
     public void status() {
         if (player == null)
             return;
-        MutableText text = Text.translatable("text.mouse-danmu.live-room-status")
-                .append(":");
-        if (bClient.isOpen()) {
-            text = text.append(Text.literal(String.valueOf(bClient.room))
-                    .formatted(Formatting.GREEN)
-                    .styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,
-                                    "https://live.bilibili.com/" + bClient.room))
-                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                    Text.translatable("text.mouse-danmu.open-live-room")))));
-        } else {
-            text = text.append(Text.translatable("text.mouse-danmu.live-room-disconnected"));
+
+        MutableText text = null;
+        MouseDanmu.LOGGER.info(state.toString());
+        switch (state) {
+            case CLOSED, CLOSING ->
+                    text = Text.translatable("text.mouse-danmu.live-room-" + state.toString().toLowerCase());
+            case CONNECTED, CONNECTING ->
+                    text = Text.translatable("text.mouse-danmu.live-room-" + state.toString().toLowerCase(),
+                                    String.valueOf(room))
+                            .formatted(Formatting.GREEN)
+                            .styled(style -> style
+                                    .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,
+                                            "https://live.bilibili.com/" + room))
+                                    .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                            Text.translatable("text.mouse-danmu.open-live-room"))));
         }
         player.sendMessage(text);
     }
@@ -112,6 +135,23 @@ public class DanmuClient implements DanmuHandler, Join, Disconnect {
         gift.name = "粉丝团灯牌";
         gift.num = 1;
         gift.user = user;
+        onGift(gift);
+        Thread.sleep(delay);
+
+        gift.price = config.gift.price1;
+        gift.name = "礼物1";
+        onGift(gift);
+        Thread.sleep(delay);
+        gift.price = config.gift.price2;
+        gift.name = "礼物2";
+        onGift(gift);
+        Thread.sleep(delay);
+        gift.price = config.gift.price3;
+        gift.name = "礼物3";
+        onGift(gift);
+        Thread.sleep(delay);
+        gift.price = config.gift.price4;
+        gift.name = "礼物4";
         onGift(gift);
         Thread.sleep(delay);
 
@@ -223,36 +263,19 @@ public class DanmuClient implements DanmuHandler, Join, Disconnect {
     }
 
     @Override
-    public void onPlayDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
-        close();
-        player = null;
-    }
-
-    @Override
-    public void onPlayReady(ClientPlayNetworkHandler handler, PacketSender sender, MinecraftClient client) {
-        player = client.player;
-        if (MouseDanmu.config.liveRoom.autoConnect &&
-                MouseDanmu.config.liveRoom.roomId != 0) {
-            connect(MouseDanmu.config.liveRoom.roomId);
-        }
-    }
-
-    @Override
-    public boolean onDanmu(Danmu danmu) {
+    public void onDanmu(Danmu danmu) {
         if (config.danmu.isShow && player != null)
             player.sendMessage(danmuText.convert(danmu));
-        return false;
     }
 
     @Override
-    public boolean onEmoji(Emoji emoji) {
+    public void onEmoji(Emoji emoji) {
         if (config.danmu.isShowEmoji && player != null)
             player.sendMessage(danmuText.convert(emoji));
-        return false;
     }
 
     @Override
-    public boolean onGift(Gift gift) {
+    public void onGift(Gift gift) {
         if (config.gift.isShow && player != null) {
             if (config.gift.isShowFreeGiftToOverlayMessage && gift.price <= 0) {
                 MinecraftClient.getInstance().inGameHud
@@ -261,36 +284,32 @@ public class DanmuClient implements DanmuHandler, Join, Disconnect {
                 player.sendMessage(danmuText.convert(gift));
             }
         }
-        return false;
     }
 
     @Override
-    public boolean onSuperChat(SuperChat sc) {
+    public void onSuperChat(SuperChat sc) {
         if (config.superChat.isShowBossBar) {
             addSuperChat(sc);
         }
         if (config.superChat.isShowChat && player != null) {
             player.sendMessage(danmuText.convert(sc));
         }
-        return false;
     }
 
     @Override
-    public boolean onGuard(Guard guard) {
+    public void onGuard(Guard guard) {
         if (config.guard.isShow && player != null)
             player.sendMessage(danmuText.convert(guard));
-        return false;
     }
 
     @Override
-    public boolean onInteractive(Interactive interactive) {
+    public void onInteractive(Interactive interactive) {
         if (config.danmu.isShowInteractive && player != null) {
             player.sendMessage(danmuText.convert(interactive));
         }
         if (config.danmu.isShowInteractiveToOverlayMessage)
             MinecraftClient.getInstance().inGameHud.setOverlayMessage(
                     danmuText.convert(interactive), false);
-        return false;
     }
 
     ArrayList<BossBar> bossBars = new ArrayList<>();
@@ -304,11 +323,11 @@ public class DanmuClient implements DanmuHandler, Join, Disconnect {
         MutableText text = danmuText
                 .convertUser(sc.user)
                 .append(Texts.bracketed(Text.literal(String.valueOf(sc.price)))
-                        .styled(style -> style.withColor(ColorPicker.superChat(config.superChat, sc.price))))
+                        .styled(style -> style.withColor(colorPicker.superChat(sc.price))))
                 .append(Text.literal(sc.body).formatted(Formatting.WHITE));
         ClientBossBar bossBar = new ClientBossBar(
                 uuid, text, 1,
-                ColorPicker.superChatBossBar(sc.price),
+                colorPicker.superChatBossBar(sc.price),
                 BossBar.Style.PROGRESS,
                 false, false, false);
         sc.user.fansMedal = fans;
@@ -330,15 +349,16 @@ public class DanmuClient implements DanmuHandler, Join, Disconnect {
             hud.handlePacket(packet);
         });
 
-        float x = 1f / sc.time;
         new Timer().schedule(new TimerTask() {
+            float x = 1f / sc.time;
+            float percent = 1f;
+
             @Override
             public void run() {
-                float percent = bossBar.getPercent();
                 percent -= x;
                 bossBar.setPercent(percent);
                 BossBarS2CPacket p;
-                if (percent < 0) {
+                if (percent <= 0) {
                     p = BossBarS2CPacket.remove(uuid);
                     this.cancel();
                 } else {
@@ -352,36 +372,45 @@ public class DanmuClient implements DanmuHandler, Join, Disconnect {
 
     @SuppressWarnings("unused")
     public void delSuperChat(UUID uuid) {
+        bossBars.stream().filter(b -> b.getUuid() == uuid)
+                .findAny().ifPresent(bossBar -> bossBars.remove(bossBar));
         BossBarS2CPacket packet = BossBarS2CPacket.remove(uuid);
-        MinecraftClient.getInstance().inGameHud.getBossBarHud().handlePacket(packet);
+        MinecraftClient.getInstance().submit(() ->
+                MinecraftClient.getInstance().inGameHud.getBossBarHud().handlePacket(packet));
     }
 
     int retries = 0;
 
     @Override
-    public boolean onClose(int code, String reason, boolean remote) {
+    public void onClose(int code, String reason, boolean remote) {
         status();
-        if (remote && retries < 4) {
-            bClient.reconnect();
+        if (!remote)
+            return;
+        String msg;
+        if (retries < 4) {
+            connect(room);
             retries++;
-            MouseDanmu.LOGGER.error("已断开重连，代码：%d".formatted(code));
+            msg = "已断线重连，代码：%d".formatted(code);
         } else {
-            MouseDanmu.LOGGER.error("已断开连接，代码：%d".formatted(code));
+            msg = "已断开连接，代码：%d".formatted(code);
         }
-        return false;
+        MouseDanmu.LOGGER.info(msg);
+        if (player != null)
+            player.sendMessage(Text.literal(msg).formatted(Formatting.GOLD));
     }
 
     @Override
-    public boolean onError(Exception ex) {
+    public void onError(Exception ex) {
         MouseDanmu.LOGGER.error("鼠鼠出错", ex);
-        return false;
+        String msg = "鼠鼠出错:" + ex.getMessage();
+        if (player != null)
+            player.sendMessage(Text.literal(msg).formatted(Formatting.RED));
     }
 
     @Override
-    public boolean onOpen() {
-        MouseDanmu.LOGGER.error("已连接：%d".formatted(bClient.room));
-        status();
+    public void onOpen() {
+        MouseDanmu.LOGGER.info("已连接：%d".formatted(room));
         retries = 0;
-        return false;
+        status();
     }
 }

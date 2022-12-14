@@ -1,4 +1,5 @@
 {
+  "mouse-danmu.bilibili": "哔哩哔哩",
   "mouse-danmu.qun": "QQ群",
   "text.autoconfig.mouse-danmu.category.danmu": "弹幕",
   "text.autoconfig.mouse-danmu.category.gift": "礼物",
@@ -26,6 +27,7 @@
   "text.autoconfig.mouse-danmu.option.gift.color3": ">=金额3的颜色",
   "text.autoconfig.mouse-danmu.option.gift.color4": ">=金额4的颜色",
   "text.autoconfig.mouse-danmu.option.gift.isShow": "显示礼物",
+  "text.autoconfig.mouse-danmu.option.gift.isShowFreeGiftToOverlayMessage": "免费礼物显示到屏幕中间",
   "text.autoconfig.mouse-danmu.option.gift.price1": "金额1",
   "text.autoconfig.mouse-danmu.option.gift.price2": "金额2",
   "text.autoconfig.mouse-danmu.option.gift.price3": "金额3",
@@ -54,12 +56,12 @@
   "text.mouse-danmu.click-to-user-space": "点击打开用户主页",
   "text.mouse-danmu.click-to-view-emoji": "点击查看表情",
   "text.mouse-danmu.entry-live-room": "进入直播间",
-  "text.mouse-danmu.live-room-disconnected": "未连接",
-  "text.mouse-danmu.live-room-status": "直播间",
+  "text.mouse-danmu.live-room-closed": "已断开",
+  "text.mouse-danmu.live-room-closing": "正在关闭",
+  "text.mouse-danmu.live-room-connected": "已连接:%d",
+  "text.mouse-danmu.live-room-connecting": "正在连接:%d",
   "text.mouse-danmu.mutual-attention-live-room": "互粉了主播",
   "text.mouse-danmu.open-live-room": "点击打开直播间",
   "text.mouse-danmu.share-live-room": "分享了直播间",
-  "text.mouse-danmu.special-attention-live-room": "特别关注了主播",
-  "text.autoconfig.mouse-danmu.option.gift.isShowFreeGiftToOverlayMessage": "免费礼物显示到屏幕中间",
-  "mouse-danmu.bilibili": "哔哩哔哩"
+  "text.mouse-danmu.special-attention-live-room": "特别关注了主播"
 }
