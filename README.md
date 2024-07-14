@@ -70,10 +70,3 @@ window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id
 
 ![效果演示](https://user-images.githubusercontent.com/51829935/206930179-9e6a5419-0127-4cf3-9f36-7554a66e448a.png)
 ![选项界面](https://user-images.githubusercontent.com/51829935/206930213-3c101622-2f8f-4fcd-949d-46b971d9d552.png)
-
-## 捐赠
-<div>
-	<img style="height: 200px;" alt="支付宝收款码" src="https://user-images.githubusercontent.com/51829935/207527270-67065069-c294-4f67-befa-bed66c680306.png">
-	<img style="height: 200px;" alt="微信收款码" src="https://user-images.githubusercontent.com/51829935/207527395-0a3802a2-2ce6-48e2-bb04-e83dbc4236d3.png">
-</div>
-
