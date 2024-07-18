@@ -88,8 +88,8 @@ public class DanmuConverter {
             case 1 -> Text.translatable("text.mouse-danmu.entry-live-room");
             case 2 -> Text.translatable("text.mouse-danmu.attention-live-room");
             case 3 -> Text.translatable("text.mouse-danmu.share-live-room");
-            case 4 -> Text.translatable("special-attention-live-room");
-            case 5 -> Text.translatable("mutual-attention-live-room");
+            case 4 -> Text.translatable("text.mouse-danmu.special-attention-live-room");
+            case 5 -> Text.translatable("text.mouse-danmu.mutual-attention-live-room");
             default -> Text.literal("未知互动类型:%d".formatted(interactive.type));
         };
         var mutableText = Texts.bracketed(msg)
