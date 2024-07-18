@@ -12,6 +12,8 @@ public class LiveRoomConfig implements ConfigData {
     public boolean autoConnect = false;
     @ConfigEntry.Gui.Tooltip
     public int roomId = 24256088;
+    @ConfigEntry.Gui.Tooltip
+    public String cookie = "";
 
     public ArrayList<Integer> history = new ArrayList<>();
 }

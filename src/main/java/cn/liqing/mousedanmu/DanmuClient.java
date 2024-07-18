@@ -20,11 +20,13 @@ import static net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionE
 import static net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.Join;
 
 public class DanmuClient extends BLiveClient implements Disconnect, Join {
-    @Nullable PlayerEntity player;
+    @Nullable
+    PlayerEntity player;
     final ModConfig config;
     final DanmuConverter danmuText;
     final DanmuColorPicker colorPicker;
     final SuperChatManager superChatManager;
+    private int room;
 
     public DanmuClient(ModConfig config) {
         ClientPlayConnectionEvents.JOIN.register(this);
@@ -45,16 +47,19 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
     public void onPlayReady(ClientPlayNetworkHandler handler, PacketSender sender, @NotNull MinecraftClient client) {
         player = client.player;
         if (config.liveRoom.autoConnect && config.liveRoom.roomId != 0) {
-            if (!connect(config.liveRoom.roomId))
-                status();
+            connect(config.liveRoom.roomId);
         }
     }
 
-    @Override
-    public boolean connect(int room) {
-        if (!super.connect(room)) {
+    public void connect(int room) {
+        this.room = room;
+        try {
+            Auth auth = config.liveRoom.cookie.isEmpty() ? 
+                    Auth.create(room) : 
+                    Auth.create(room, config.liveRoom.cookie);
+            super.connect(auth);
+        } catch (Exception e) {
             status();
-            return false;
         }
 
         //添加连接记录
@@ -64,7 +69,6 @@ public class DanmuClient extends BLiveClient implements Disconnect, Join {
             history.remove(i);
         history.add(0, room);
         MouseDanmu.configHolder.save();
-        return true;
     }
 
     @Override

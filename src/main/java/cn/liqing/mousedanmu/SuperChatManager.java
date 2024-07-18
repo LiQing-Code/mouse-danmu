@@ -96,7 +96,7 @@ public class SuperChatManager {
                         if (sc.getPercent() <= 0)
                             superChatList.remove(i);
                     }
-                    if (superChatList.size() < 1)
+                    if (superChatList.isEmpty())
                         return;
                     //溢出时暂时移除已经显示showTime秒或以上的
                     if (displayList.size() >= 4 &&
