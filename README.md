@@ -67,7 +67,7 @@ window.__NEPTUNE_IS_MY_WAIFU__.roomInitRes.data.room_id
 
 表情弹幕是可以点击打开网页查看的，用户名也可以点击查看主页
 
-项目依赖的库 [BLiveDanmu](https://github.com/LiQing-Code/BLiveDanmu/tree/master)
+项目依赖的库 [bili-live-danmu](https://github.com/LiQing-Code/bili-live-danmu)
 
 ## 免责声明
 
