@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "mousedanmu",
+  "version": "${version}",
+  "name": "鼠鼠弹幕",
+  "description": "可以看哔哩哔哩直播弹幕！\n 使用 '/mousedanmu' 或 '/dm' 控制\n '/dm connect 直播间号' 连接直播间\n点击网站按钮获取更多使用帮助\n\n免责声明：\n本模组用于获取哔哩哔哩直播的弹幕并在《我的世界》游戏聊天框中显示，提供了使用用户Cookie获取弹幕信息及发送弹幕的功能。\n\n请注意：\n1. 使用用户Cookie获取弹幕信息或发送弹幕，可能存在被哔哩哔哩封禁账号的风险，尽管目前尚无明确案例。\n2. 如果在使用本模组时进行《我的世界》直播，尽管游戏聊天框显示的弹幕来自哔哩哔哩，但不合规的弹幕可能导致直播间被封禁。\n\n使用本模组即表示您理解并接受以上风险，开发者不对因使用本模组导致的任何账号或直播间封禁承担责任。",
+  "authors": [
+    "立青"
+  ],
+  "contact": {
+    "homepage": "https://gitee.com/LiQing-Code/mouse-danmu",
+    "sources": "https://github.com/LiQing-Code/mouse-danmu",
+    "issues": "https://github.com/LiQing-Code/mouse-danmu/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/mousedanmu/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "cn.liqing.mousedanmu.MouseDanmu"
+    ],
+    "modmenu": [
+      "cn.liqing.mousedanmu.ModMenuIntegration"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "fabricloader": "*",
+    "minecraft": ">=1.19",
+    "cloth-config": ">=8.3.115"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "mousedanmu.qun": "https://jq.qq.com/?_wv=1027&k=nImOUpnV",
+        "mousedanmu.bilibili": "https://space.bilibili.com/345259002"
+      }
+    }
+  }
+}
