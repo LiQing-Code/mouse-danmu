@@ -30,6 +30,8 @@
 
 ## 使用说明
 
+[视频教程](https://www.bilibili.com/video/BV1e887e3EV8)
+
 安装完成以后游戏中会添加一个 `/mousedanmu` 命令，用来控制直播间操作。
 
 嫌 `/mousedanmu` 这个命令太长的话，可以使用 `/dm` 这个重定向命令，使用时会重定向到 `/mousedanmu`
