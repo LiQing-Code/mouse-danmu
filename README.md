@@ -17,10 +17,32 @@
 
 ## 前置
 
-- 我的世界 >= 1.19
+- 我的世界 1.20.4 或 1.21.10 (使用 Stonecutter 构建支持多版本)
 - [Cloth Config](https://github.com/shedaniel/cloth-config) >= 8.3.115
 - [可选,推荐安装] [ModMenu](https://github.com/TerraformersMC/ModMenu) >= 4.0.0
   安装这个以后才能打开MOD选项
+
+## 构建
+
+本项目使用 Stonecutter 支持多个 Minecraft 版本。当前支持的版本：
+- Minecraft 1.20.4 (Java 17)
+- Minecraft 1.21.10 (Java 21)
+
+### 构建当前活动版本 (1.21.10)
+```bash
+./gradlew build
+```
+
+### 构建所有版本
+```bash
+./gradlew chiseledBuild
+```
+
+生成的 JAR 文件位于 `build/libs/` 目录：
+- `mousedanmu-2.1.0+mc1.20.4.jar`
+- `mousedanmu-2.1.0+mc1.21.10.jar`
+
+**注意**: 构建需要 [bili-live-danmu](https://github.com/LiQing-Code/bili-live-danmu) 项目克隆在父目录 (`../bili-live-danmu`)
 
 ## 安装
 
