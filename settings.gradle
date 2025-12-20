@@ -29,5 +29,5 @@ stonecutter {
     create(rootProject)
 }
 
-// include ':bili-live-danmu'
-// project(':bili-live-danmu').projectDir = new File(settingsDir, '../bili-live-danmu')
+include ':bili-live-danmu'
+project(':bili-live-danmu').projectDir = new File(settingsDir, '../bili-live-danmu')

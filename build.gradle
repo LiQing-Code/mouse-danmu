@@ -67,10 +67,10 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    // implementation project(':bili-live-danmu')
+    implementation project(':bili-live-danmu')
 
 
-    // include(project(":bili-live-danmu"))
+    include(project(":bili-live-danmu"))
     include 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
     include 'com.fasterxml.jackson.core:jackson-core:2.17.2'
     include 'com.fasterxml.jackson.core:jackson-annotations:2.17.2'
