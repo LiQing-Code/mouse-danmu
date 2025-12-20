@@ -8,5 +8,21 @@ pluginManagement {
     }
 }
 
+plugins {
+    id 'dev.kikugie.stonecutter' version '0.5.3'
+}
+
+extensions.configure(stonecutter.settings.class) {
+    shared {
+        // 定义支持的版本（从旧到新）
+        versions '1.19.4', '1.20.1', '1.20.4', '1.21.10'
+        
+        // 版本控制使用最新版本
+        vcsVersion = '1.21.10'
+    }
+    
+    create rootProject
+}
+
 include ':bili-live-danmu'
 project(':bili-live-danmu').projectDir = new File(settingsDir, '../bili-live-danmu')
