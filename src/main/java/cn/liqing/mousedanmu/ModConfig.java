@@ -53,10 +53,8 @@ public class ModConfig implements ConfigData {
         @ConfigEntry.ColorPicker
         public int fansLargerThan20 = Color.ofRGBA(26, 84, 75, 0).getColor();
         @ConfigEntry.ColorPicker
-        //public int fansLargerThan24 = Color.ofRGBA(6, 21, 76, 0).getColor();
         public int fansLargerThan24 = Color.ofRGBA(102, 179, 255, 0).getColor();
         @ConfigEntry.ColorPicker
-        //public int fansLargerThan28 = Color.ofRGBA(45, 8, 85, 0).getColor();
         public int fansLargerThan28 = Color.ofRGBA(255, 128, 223, 0).getColor();
     }
 

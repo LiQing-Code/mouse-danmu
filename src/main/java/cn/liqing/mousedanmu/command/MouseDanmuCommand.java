@@ -7,8 +7,21 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.command.argument.MessageArgumentType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MouseDanmuCommand {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MouseDanmuCommand.class);
+    private static final ExecutorService executorService = Executors.newCachedThreadPool(r -> {
+        Thread thread = new Thread(r);
+        thread.setName("MouseDanmu-Command-" + thread.getId());
+        thread.setDaemon(true);
+        return thread;
+    });
+
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         var literalCommandNode = dispatcher.register(ClientCommandManager.literal("mousedanmu")
                 .then(ClientCommandManager.literal("connect")
@@ -46,17 +59,19 @@ public class MouseDanmuCommand {
     }
 
     public static int test(int delay) {
-        new Thread(() -> {
+        executorService.submit(() -> {
             try {
                 MouseDanmu.client.test(delay);
-            } catch (InterruptedException ignored) {
+            } catch (InterruptedException e) {
+                LOGGER.debug("Test command interrupted", e);
+                Thread.currentThread().interrupt();
             }
-        }).start();
+        });
         return 1;
     }
 
     public static int send(String message) {
-        new Thread(() -> MouseDanmu.client.sendDanmu(message)).start();
+        executorService.submit(() -> MouseDanmu.client.sendDanmu(message));
         return 1;
     }
 }

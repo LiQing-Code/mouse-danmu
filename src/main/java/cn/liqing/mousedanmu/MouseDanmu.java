@@ -25,7 +25,7 @@ public class MouseDanmu implements ClientModInitializer {
         return configHolder.getConfig();
     }
 
-    public static void save(){
+    public static void save() {
         configHolder.save();
     }
 }

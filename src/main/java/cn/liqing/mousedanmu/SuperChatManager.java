@@ -49,16 +49,21 @@ public class SuperChatManager {
             superChatList.add(scBossBar);
         }
 
-        if (handlePacketTimer == null) {
-            handlePacketTimer = new Timer();
-            handlePacketTimer.schedule(handlePackets(), 0, 1000);
+        // Thread-safe timer initialization
+        synchronized (this) {
+            if (handlePacketTimer == null) {
+                handlePacketTimer = new Timer("SuperChatTimer", true);
+                handlePacketTimer.schedule(handlePackets(), 0, 1000);
+            }
         }
     }
 
     public void clear() {
-        if (handlePacketTimer != null) {
-            handlePacketTimer.cancel();
-            handlePacketTimer = null;
+        synchronized (this) {
+            if (handlePacketTimer != null) {
+                handlePacketTimer.cancel();
+                handlePacketTimer = null;
+            }
         }
         synchronized (superChatList) {
             superChatList.clear();
