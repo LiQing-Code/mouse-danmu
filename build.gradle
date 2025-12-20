@@ -1,7 +1,21 @@
+buildscript {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath "net.fabricmc:fabric-loom:1.7-SNAPSHOT"
+    }
+}
+
 plugins {
-    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
 }
+
+apply plugin: 'fabric-loom'
 
 version = project.mod_version
 group = project.maven_group
@@ -67,7 +81,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 21
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
