@@ -18,7 +18,6 @@ public class MessageUtil {
     
     // 缓存反射方法，避免重复查找
     private static Method sendMessageMethod = null;
-    private static boolean methodSearched = false;
     private static boolean useTwoParams = false;
     
     static {
@@ -45,7 +44,6 @@ public class MessageUtil {
                 LOGGER.error("无法找到 sendMessage 方法，可能不支持当前 Minecraft 版本");
             }
         }
-        methodSearched = true;
     }
     
     /**
@@ -57,10 +55,6 @@ public class MessageUtil {
     public static void sendMessage(@Nullable PlayerEntity player, Text message) {
         if (player == null || message == null) {
             return;
-        }
-        
-        if (!methodSearched) {
-            detectVersion();
         }
         
         try {
