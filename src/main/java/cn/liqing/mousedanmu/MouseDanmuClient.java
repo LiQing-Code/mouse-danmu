@@ -76,7 +76,11 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
             LOGGER.error("鼠鼠出错", e);
             String msg = "鼠鼠出错:" + e.getMessage();
             if (player != null)
-                player.sendMessage(Text.literal(msg).formatted(Formatting.RED));
+                /*? if >=1.21 {*/
+                player.sendMessage(Text.literal(msg).formatted(Formatting.RED), false);
+                /*? } else {*/
+                /*player.sendMessage(Text.literal(msg).formatted(Formatting.RED));
+                /*? }*/
         }
 
         //添加连接记录
@@ -107,7 +111,11 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
         } else {
             text = Text.translatable("text.mousedanmu.live-room-closed");
         }
-        player.sendMessage(text);
+        /*? if >=1.21 {*/
+        player.sendMessage(text, false);
+        /*? } else {*/
+        /*player.sendMessage(text);
+        /*? }*/
     }
 
     public void test(int delay) throws InterruptedException {
@@ -271,12 +279,20 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
 
     public void onDanmu(Danmu danmu) {
         if (config.danmu.isShow && player != null)
-            player.sendMessage(danmuText.convert(danmu));
+            /*? if >=1.21 {*/
+            player.sendMessage(danmuText.convert(danmu), false);
+            /*? } else {*/
+            /*player.sendMessage(danmuText.convert(danmu));
+            /*? }*/
     }
 
     public void onEmoji(Emoji emoji) {
         if (config.danmu.isShowEmoji && player != null)
-            player.sendMessage(danmuText.convert(emoji));
+            /*? if >=1.21 {*/
+            player.sendMessage(danmuText.convert(emoji), false);
+            /*? } else {*/
+            /*player.sendMessage(danmuText.convert(emoji));
+            /*? }*/
     }
 
     public void onGift(Gift gift) {
@@ -285,7 +301,11 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
                 MinecraftClient.getInstance().inGameHud
                         .setOverlayMessage(danmuText.convert(gift), false);
             } else {
-                player.sendMessage(danmuText.convert(gift));
+                /*? if >=1.21 {*/
+                player.sendMessage(danmuText.convert(gift), false);
+                /*? } else {*/
+                /*player.sendMessage(danmuText.convert(gift));
+                /*? }*/
             }
         }
     }
@@ -295,18 +315,30 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
             superChatManager.add(sc);
         }
         if (config.superChat.isShowChat && player != null) {
-            player.sendMessage(danmuText.convert(sc));
+            /*? if >=1.21 {*/
+            player.sendMessage(danmuText.convert(sc), false);
+            /*? } else {*/
+            /*player.sendMessage(danmuText.convert(sc));
+            /*? }*/
         }
     }
 
     public void onGuard(Guard guard) {
         if (config.guard.isShow && player != null)
-            player.sendMessage(danmuText.convert(guard));
+            /*? if >=1.21 {*/
+            player.sendMessage(danmuText.convert(guard), false);
+            /*? } else {*/
+            /*player.sendMessage(danmuText.convert(guard));
+            /*? }*/
     }
 
     public void onInteractive(Interactive interactive) {
         if (config.danmu.isShowInteractive && player != null) {
-            player.sendMessage(danmuText.convert(interactive));
+            /*? if >=1.21 {*/
+            player.sendMessage(danmuText.convert(interactive), false);
+            /*? } else {*/
+            /*player.sendMessage(danmuText.convert(interactive));
+            /*? }*/
         }
         if (config.danmu.isShowInteractiveToOverlayMessage)
             MinecraftClient.getInstance().inGameHud.setOverlayMessage(
@@ -319,7 +351,11 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
         msg = "已断开连接，代码：%d".formatted(code);
         LOGGER.info(msg);
         if (player != null)
-            player.sendMessage(Text.literal(msg).formatted(Formatting.GOLD));
+            /*? if >=1.21 {*/
+            player.sendMessage(Text.literal(msg).formatted(Formatting.GOLD), false);
+            /*? } else {*/
+            /*player.sendMessage(Text.literal(msg).formatted(Formatting.GOLD));
+            /*? }*/
     }
 
     @Override
@@ -327,7 +363,11 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
         LOGGER.error("鼠鼠出错", ex);
         String msg = "鼠鼠出错:" + ex.getMessage();
         if (player != null)
-            player.sendMessage(Text.literal(msg).formatted(Formatting.RED));
+            /*? if >=1.21 {*/
+            player.sendMessage(Text.literal(msg).formatted(Formatting.RED), false);
+            /*? } else {*/
+            /*player.sendMessage(Text.literal(msg).formatted(Formatting.RED));
+            /*? }*/
     }
 
     @Override
@@ -343,7 +383,11 @@ public class MouseDanmuClient implements ClientPlayConnectionEvents.Disconnect, 
             LOGGER.error("鼠鼠出错", e);
             String msg = "鼠鼠出错:" + e.getMessage();
             if (player != null)
-                player.sendMessage(Text.literal(msg).formatted(Formatting.RED));
+                /*? if >=1.21 {*/
+                player.sendMessage(Text.literal(msg).formatted(Formatting.RED), false);
+                /*? } else {*/
+                /*player.sendMessage(Text.literal(msg).formatted(Formatting.RED));
+                /*? }*/
         }
     }
 }

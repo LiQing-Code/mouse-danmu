@@ -4,9 +4,30 @@ pluginManagement {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
+        maven {
+            name = 'Fabric Snapshots'
+            url = 'https://maven.fabricmc.net/snapshots'
+        }
+        mavenCentral()
         gradlePluginPortal()
     }
 }
 
-include ':bili-live-danmu'
-project(':bili-live-danmu').projectDir = new File(settingsDir, '../bili-live-danmu')
+plugins {
+    id 'dev.kikugie.stonecutter' version '0.7.11'
+}
+
+stonecutter {
+    shared {
+        // 定义支持的版本
+        versions '1.20.4', '1.21.10'
+        
+        // 版本控制使用最新版本
+        vcsVersion = '1.21.10'
+    }
+    
+    create(rootProject)
+}
+
+// include ':bili-live-danmu'
+// project(':bili-live-danmu').projectDir = new File(settingsDir, '../bili-live-danmu')
