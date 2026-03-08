@@ -17,7 +17,7 @@
 
 ## 前置
 
-- 我的世界 >= 1.19
+- 我的世界 >= 1.19 <= 1.20.4
 - [Cloth Config](https://github.com/shedaniel/cloth-config) >= 8.3.115
 - [可选,推荐安装] [ModMenu](https://github.com/TerraformersMC/ModMenu) >= 4.0.0
   安装这个以后才能打开MOD选项
